@@ -19,6 +19,7 @@ following:
 - [x] HACK disassembler
 - [ ] HACK interpreter
 - [ ] HACK CPU emulator
+- [ ] JACK virtual machine
 - [ ] JACK compiler
 
 ## Usage
@@ -28,7 +29,7 @@ following:
 `cargo run -- --help` or `has --help`:
 
 ```
-has 0.2.0
+has 0.3.0
 The HACK Application Suite
 
 USAGE:
@@ -53,7 +54,7 @@ must not already exist.
 `has asm --help`:
 
 ```
-has-asm 0.2.0
+has-asm 0.3.0
 Assemble a HACK file
 
 USAGE:
@@ -79,7 +80,7 @@ output file must not already exist.
 `has dis --help`:
 
 ```
-has-dis 0.2.0
+has-dis 0.3.0
 Disassemble a HACK file
 
 USAGE:
