@@ -176,6 +176,7 @@ pub enum Comp {
 /// assert_eq!(u16::from(Comp::MMinusD), 0b1000111);
 /// assert_eq!(u16::from(Comp::DAndM),   0b1000000);
 /// assert_eq!(u16::from(Comp::DOrM),    0b1010101);
+/// ```
 impl From<Comp> for u16 {
   fn from(comp: Comp) -> Self {
     match comp {
@@ -249,6 +250,7 @@ impl From<Comp> for u16 {
 /// assert_eq!(Comp::try_from(0b1000111), Ok(Comp::MMinusD));
 /// assert_eq!(Comp::try_from(0b1000000), Ok(Comp::DAndM));
 /// assert_eq!(Comp::try_from(0b1010101), Ok(Comp::DOrM));
+/// ```
 impl TryFrom<u16> for Comp {
   type Error = ();
 
