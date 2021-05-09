@@ -18,6 +18,9 @@ name = "has"
 [[bin]]
 name = "has"
 
+[[test]]
+name = "programs"
+
 [dependencies]
 structopt = "0.3"
 env_logger = "0.7"
