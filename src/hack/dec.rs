@@ -30,7 +30,7 @@ impl Impl for BinParser {
   type Item = Res;
 
   fn next<T: Impl>(parser: &mut Parser<T>) -> Option<Self::Item> {
-    let &msb = parser.buf.get(0)?;
+    let &msb = parser.buf.first()?;
     let &lsb = if let Some(lsb) = parser.buf.get(1) {
       lsb
     } else {
@@ -54,7 +54,7 @@ impl Impl for BinTextParser {
 
   fn next<T: Impl>(parser: &mut Parser<T>) -> Option<Self::Item> {
     'MAIN: loop {
-      let &b = parser.buf.get(0)?;
+      let &b = parser.buf.first()?;
 
       if b.is_ascii_whitespace() {
         let (len, rem) = parser::read_ws(parser.buf);

@@ -155,7 +155,7 @@ impl<'b> TryFrom<Buf<'b>> for Label<'b> {
   type Error = Err;
 
   fn try_from(buf: Buf<'b>) -> Result<Self, Self::Error> {
-    let c0 = if let Some(&c0) = buf.get(0) {
+    let c0 = if let Some(&c0) = buf.first() {
       c0
     } else {
       return Err(Err::Empty);

@@ -22,7 +22,7 @@ where
     .iter()
     .enumerate()
     .find_map(|(i, &c)| if pred(c) { None } else { Some(i) })
-    .unwrap_or_else(|| buf.len());
+    .unwrap_or(buf.len());
 
   (&buf[..split], &buf[split..])
 }
@@ -75,7 +75,7 @@ pub fn read_one<P>(buf: Buf, pred: P) -> Option<(Byte, Buf)>
 where
   P: Fn(Byte) -> bool,
 {
-  if let Some(&b) = buf.get(0) {
+  if let Some(&b) = buf.first() {
     if pred(b) {
       Some((b, &buf[1..]))
     } else {

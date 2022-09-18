@@ -236,7 +236,7 @@ impl<'b> Iterator for Parser<'b> {
 
   fn next(&mut self) -> Option<Self::Item> {
     'MAIN: loop {
-      let &b = self.buf.get(0)?;
+      let &b = self.buf.first()?;
 
       if b.is_ascii_whitespace() {
         let (len, rem) = parser::read_ws(self.buf);
@@ -244,7 +244,7 @@ impl<'b> Iterator for Parser<'b> {
         self.buf = rem;
         continue 'MAIN;
       } else if b == b'/' {
-        match self.buf.get(0) {
+        match self.buf.first() {
           Some(b'/') => {}
           Some(_) => return Some(Err(Err::expected_comment(self))),
           None => return Some(Err(Err::expected_comment(self))),
