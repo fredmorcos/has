@@ -121,8 +121,8 @@ impl Impl for BinTextParser {
 ///
 /// There are two ways to parse HACK programs: from binary files and
 /// from the textual representation of such binary files. Use
-/// [Parser<BinaryImpl>] to create a parser for binary HACK files and
-/// [Parser<TextImpl>] to create a parser for text HACK files.
+/// [`Parser<BinaryImpl>`] to create a parser for binary HACK files and
+/// [`Parser<TextImpl>`] to create a parser for text HACK files.
 ///
 /// ## Examples
 ///
