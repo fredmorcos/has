@@ -13,7 +13,7 @@ use crate::Byte;
 /// * `buf` - The input buffer.
 ///
 /// * `pred` - A predicate that should return `true` as long as
-/// `read_while` should continue to consume input.
+///   `read_while` should continue to consume input.
 pub fn read_while<P>(buf: Buf, pred: P) -> (Buf, Buf)
 where
   P: Fn(Byte) -> bool,
@@ -70,7 +70,7 @@ pub fn read_until_ws(buf: Buf) -> (Buf, Buf) {
 /// * `buf` - The input buffer.
 ///
 /// * `pred` - A predicate that should return `true` if `read_char`
-/// should consume the byte.
+///   should consume the byte.
 pub fn read_one<P>(buf: Buf, pred: P) -> Option<(Byte, Buf)>
 where
   P: Fn(Byte) -> bool,

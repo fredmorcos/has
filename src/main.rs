@@ -96,7 +96,7 @@ impl Command {
 
 fn read_file(file: &Path) -> Result<Vec<u8>, Err> {
   let mut buf = Vec::with_capacity(1024);
-  let bytes = File::open(&file)?.read_to_end(&mut buf)?;
+  let bytes = File::open(file)?.read_to_end(&mut buf)?;
   info!("Read {} bytes from {}", bytes, file.display());
   Ok(buf)
 }
@@ -113,7 +113,7 @@ fn ensure_available_outfile(out: &Path) -> Result<(), Err> {
 }
 
 fn create_outfile(out: &Path) -> Result<BufWriter<File>, Err> {
-  let output = File::create(&out)?;
+  let output = File::create(out)?;
   let writer = BufWriter::new(output);
   info!("Writing to file {}", out.display());
   Ok(writer)

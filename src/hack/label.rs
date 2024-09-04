@@ -31,7 +31,7 @@ impl<'b> Copy for Label<'b> {}
 /// string is copied, not the string itself.
 impl<'b> Clone for Label<'b> {
   fn clone(&self) -> Self {
-    Label(self.0)
+    *self
   }
 }
 
