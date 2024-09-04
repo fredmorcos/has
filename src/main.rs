@@ -1,5 +1,6 @@
 #![warn(clippy::all)]
 
+use clap::Parser;
 use derive_more::Display;
 use derive_more::From;
 use has::hack;
@@ -15,7 +16,6 @@ use std::io::Read;
 use std::io::Write;
 use std::path::Path;
 use std::path::PathBuf;
-use structopt::StructOpt;
 
 #[derive(From, Display)]
 #[display(fmt = "Error: {}")]
@@ -40,47 +40,47 @@ impl fmt::Debug for Err {
 }
 
 /// The HACK Application Suite.
-#[derive(Debug, StructOpt)]
-#[structopt(name = "has")]
+#[derive(Debug, clap::Parser)]
+#[clap(author, version, about, long_about = None)]
 struct Opt {
   /// Verbose output (can be specified multiple times).
-  #[structopt(short, long, parse(from_occurrences))]
+  #[clap(short, long, action = clap::ArgAction::Count)]
   verbose: u8,
 
   /// HAS sub-command.
-  #[structopt(subcommand)]
+  #[clap(subcommand)]
   command: Command,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, clap::Subcommand)]
 enum Command {
   /// Assemble a HACK file.
   Asm {
     /// Output a bintext instead of binary file.
-    #[structopt(short, long)]
+    #[clap(short, long)]
     bintext: bool,
 
     /// Output file (must not exist).
-    #[structopt(short, long, name = "OUT", parse(from_os_str))]
+    #[clap(short, long, name = "OUT")]
     out: PathBuf,
 
     /// Hack assembly file to compile.
-    #[structopt(name = "FILE", parse(from_os_str))]
+    #[clap(name = "FILE")]
     file: PathBuf,
   },
 
   /// Disassemble a HACK file.
   Dis {
     /// The input is a bintext instead of a binary file.
-    #[structopt(short, long)]
+    #[clap(short, long)]
     bintext: bool,
 
     /// Output file (must not exist).
-    #[structopt(short, long, name = "OUT", parse(from_os_str))]
+    #[clap(short, long, name = "OUT")]
     out: PathBuf,
 
     /// Hack file to disassemble.
-    #[structopt(name = "FILE", parse(from_os_str))]
+    #[clap(name = "FILE")]
     file: PathBuf,
   },
 }
@@ -161,7 +161,7 @@ fn exec_dis(text: bool, out: PathBuf, file: PathBuf) -> Result<(), Err> {
 }
 
 fn main() -> Result<(), Err> {
-  let opt = Opt::from_args();
+  let opt = Opt::parse();
 
   let log_level = match opt.verbose {
     0 => log::LevelFilter::Warn,
